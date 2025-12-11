@@ -52,14 +52,14 @@
 
 ### Current Pain Points with Cloud AI Solutions
 
-| Problem | Cloud AI Reality | OmniMind Solution |
-|---------|------------------|-------------------|
-| **Data Privacy** | Sensitive data sent to external servers | All data processed locally on YOUR hardware |
-| **Cost Explosion** | Pay-per-token pricing accumulates rapidly | Zero inference costs after hardware setup |
-| **Latency Issues** | Network round-trips add 200-500ms+ delay | Local inference = instant responses |
-| **Vendor Lock-in** | Dependent on provider API availability | Complete ownership of models and infrastructure |
-| **Context Isolation** | Each conversation starts fresh | Persistent context with RAG knowledge base |
-| **Passive Interaction** | Traditional bots only respond when asked | Agents proactively participate in discussions |
+| Problem                 | Cloud AI Reality                          | OmniMind Solution                               |
+| ----------------------- | ----------------------------------------- | ----------------------------------------------- |
+| **Data Privacy**        | Sensitive data sent to external servers   | All data processed locally on YOUR hardware     |
+| **Cost Explosion**      | Pay-per-token pricing accumulates rapidly | Zero inference costs after hardware setup       |
+| **Latency Issues**      | Network round-trips add 200-500ms+ delay  | Local inference = instant responses             |
+| **Vendor Lock-in**      | Dependent on provider API availability    | Complete ownership of models and infrastructure |
+| **Context Isolation**   | Each conversation starts fresh            | Persistent context with RAG knowledge base      |
+| **Passive Interaction** | Traditional bots only respond when asked  | Agents proactively participate in discussions   |
 
 ### Who Is This For?
 
@@ -152,30 +152,30 @@ Extend AI capabilities through Model Context Protocol:
 
 ### Frontend
 
-| Technology | Purpose |
-|------------|---------|
-| React 18.3 | Modern React with hooks |
-| TypeScript 5.8 | Type-safe development |
-| Vite 6.3 | Fast build tool and dev server |
-| Framer Motion | Smooth animations |
-| Socket.IO Client | Real-time communication |
+| Technology       | Purpose                        |
+| ---------------- | ------------------------------ |
+| React 18.3       | Modern React with hooks        |
+| TypeScript 5.8   | Type-safe development          |
+| Vite 6.3         | Fast build tool and dev server |
+| Framer Motion    | Smooth animations              |
+| Socket.IO Client | Real-time communication        |
 
 ### Backend
 
-| Technology | Purpose |
-|------------|---------|
-| Node.js 18+ | JavaScript runtime |
-| Express.js | Web framework |
-| Socket.IO | WebSocket server |
-| UUID | Unique identifier generation |
+| Technology  | Purpose                      |
+| ----------- | ---------------------------- |
+| Node.js 18+ | JavaScript runtime           |
+| Express.js  | Web framework                |
+| Socket.IO   | WebSocket server             |
+| UUID        | Unique identifier generation |
 
 ### AI/ML Services
 
-| Technology | Purpose |
-|------------|---------|
-| Parallax | Local LLM inference engine |
-| ChromaDB | Vector database for RAG |
-| Flask | Python web framework for RAG |
+| Technology | Purpose                      |
+| ---------- | ---------------------------- |
+| Parallax   | Local LLM inference engine   |
+| ChromaDB   | Vector database for RAG      |
+| Flask      | Python web framework for RAG |
 
 ---
 
@@ -335,46 +335,52 @@ MCP_SERVER_URL=http://localhost:3001
 
 #### Messages
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/messages/:roomId` | Get messages for a room |
-| POST | `/api/messages` | Send a new message |
-| PUT | `/api/messages/:id` | Update a message |
-| DELETE | `/api/messages/:id` | Delete a message |
+| Method | Endpoint                | Description             |
+| ------ | ----------------------- | ----------------------- |
+| GET    | `/api/messages/:roomId` | Get messages for a room |
+| POST   | `/api/messages`         | Send a new message      |
+| PUT    | `/api/messages/:id`     | Update a message        |
+| DELETE | `/api/messages/:id`     | Delete a message        |
 
 #### Rooms
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/rooms` | Get all rooms |
-| POST | `/api/rooms` | Create a new room |
-| DELETE | `/api/rooms/:id` | Delete a room |
+| Method | Endpoint         | Description       |
+| ------ | ---------------- | ----------------- |
+| GET    | `/api/rooms`     | Get all rooms     |
+| POST   | `/api/rooms`     | Create a new room |
+| DELETE | `/api/rooms/:id` | Delete a room     |
 
 #### RAG
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/rag/upload` | Upload document |
-| POST | `/api/rag/query` | Query knowledge base |
-| GET | `/api/rag/documents` | List documents |
-| DELETE | `/api/rag/documents/:id` | Delete document |
+| Method | Endpoint                 | Description          |
+| ------ | ------------------------ | -------------------- |
+| POST   | `/api/rag/upload`        | Upload document      |
+| POST   | `/api/rag/query`         | Query knowledge base |
+| GET    | `/api/rag/documents`     | List documents       |
+| DELETE | `/api/rag/documents/:id` | Delete document      |
 
 ### WebSocket Events
 
 **Client to Server:**
 
 ```javascript
-socket.emit('join_room', { roomId: 'room-123' });
-socket.emit('send_message', { roomId: 'room-123', content: 'Hello!' });
-socket.emit('typing', { roomId: 'room-123', isTyping: true });
+socket.emit("join_room", { roomId: "room-123" });
+socket.emit("send_message", { roomId: "room-123", content: "Hello!" });
+socket.emit("typing", { roomId: "room-123", isTyping: true });
 ```
 
 **Server to Client:**
 
 ```javascript
-socket.on('new_message', (message) => { /* handle */ });
-socket.on('user_typing', ({ userId, isTyping }) => { /* handle */ });
-socket.on('user_presence', ({ userId, status }) => { /* handle */ });
+socket.on("new_message", (message) => {
+  /* handle */
+});
+socket.on("user_typing", ({ userId, isTyping }) => {
+  /* handle */
+});
+socket.on("user_presence", ({ userId, status }) => {
+  /* handle */
+});
 ```
 
 ---
@@ -393,7 +399,7 @@ class CustomAgent(BaseAgent):
             personality="Helpful and friendly",
             capabilities=["task1", "task2"]
         )
-    
+
     async def process_message(self, message, context):
         response = await self.generate_response(message, context)
         return response
@@ -429,11 +435,11 @@ AI: Based on the company handbook, employees receive...
 
 ### Available Tools
 
-| Tool | Description |
-|------|-------------|
+| Tool         | Description                     |
+| ------------ | ------------------------------- |
 | `web_search` | Search the web using DuckDuckGo |
-| `fetch_url` | Extract content from a URL |
-| `wikipedia` | Search Wikipedia articles |
+| `fetch_url`  | Extract content from a URL      |
+| `wikipedia`  | Search Wikipedia articles       |
 
 ---
 
@@ -472,10 +478,7 @@ taskkill /F /PID <PID>
 Add your frontend URL to `CLIENT_ORIGINS` in `server/server.js`:
 
 ```javascript
-const CLIENT_ORIGINS = [
-  'http://localhost:5173',
-  'http://your-ip:5173'
-];
+const CLIENT_ORIGINS = ["http://localhost:5173", "http://your-ip:5173"];
 ```
 
 ### ChromaDB Installation Issues
