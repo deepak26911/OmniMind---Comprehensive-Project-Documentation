@@ -111,7 +111,7 @@ const getAgentMode = (capabilities: Partial<AgentFormState['capabilities']> | un
     return { mode: 'none', label: 'No Response', description: 'Will not reply to messages' };
 };
 
-const PROVIDERS = ['openai', 'azure', 'anthropic', 'parallax', 'custom'];
+const PROVIDERS = ['anthropic', 'openai', 'azure', 'custom'];
 const RUNTIMES = ['internal-function-calling', 'function-calling-proxy', 'custom'];
 
 const buildFormState = (agent?: Agent): AgentFormState => ({
@@ -124,8 +124,8 @@ const buildFormState = (agent?: Agent): AgentFormState => ({
         agent?.systemPrompt ||
         'You are a friendly chat assistant. Please provide concise and accurate answers based on context, citing message content when necessary.',
     model: {
-        provider: agent?.model?.provider || 'openai',
-        name: agent?.model?.name || 'gpt-4o-mini',
+        provider: agent?.model?.provider || 'anthropic',
+        name: agent?.model?.name || 'claude-sonnet-4-20250514',
         temperature: agent?.model?.temperature ?? 0.6,
         maxTokens: agent?.model?.maxTokens ?? 800,
         endpoint: (agent?.runtime?.endpoint as string) || '',

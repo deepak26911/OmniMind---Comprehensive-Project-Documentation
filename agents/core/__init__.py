@@ -34,6 +34,10 @@ from .config import (
     CONTEXT_LIMIT,
     REQUEST_TIMEOUT,
     LLM_TIMEOUT,
+    # LLM defaults
+    DEFAULT_LLM_MODEL,
+    DEFAULT_LLM_API_KEY,
+    DEFAULT_LLM_BASE_URL,
 )
 
 from .response_cleaner import (
@@ -114,6 +118,10 @@ __all__ = [
     "CONTEXT_LIMIT",
     "REQUEST_TIMEOUT",
     "LLM_TIMEOUT",
+    # LLM defaults
+    "DEFAULT_LLM_MODEL",
+    "DEFAULT_LLM_API_KEY",
+    "DEFAULT_LLM_BASE_URL",
     # Response cleaner
     "log_text",
     "strip_special_tags",

@@ -2,11 +2,11 @@
 """
 LLM Client
 
-OpenAI-compatible LLM client wrapper for agent services.
-Supports custom endpoints (gpt-oss, Azure, etc.) via base_url configuration.
+Claude API client wrapper for agent services.
+Uses the Anthropic SDK for all LLM interactions.
 """
-from openai import OpenAI
-from typing import Optional
+import anthropic
+from typing import Optional, List, Dict
 
 from .config import (
     DEFAULT_LLM_BASE_URL,
@@ -16,44 +16,39 @@ from .config import (
 
 
 # Global client instance (will be initialized on first use or via configure)
-_client: Optional[OpenAI] = None
+_client: Optional[anthropic.Anthropic] = None
 _current_config = {
-    "base_url": DEFAULT_LLM_BASE_URL,
     "api_key": DEFAULT_LLM_API_KEY,
 }
 
 
-def configure(base_url: str = None, api_key: str = None) -> OpenAI:
+def configure(base_url: str = None, api_key: str = None) -> anthropic.Anthropic:
     """
-    Configure the LLM client with custom endpoint.
+    Configure the LLM client with custom API key.
 
     Args:
-        base_url: OpenAI-compatible API endpoint URL
-        api_key: API key (may be "not-needed" for local models)
+        base_url: Ignored for Claude (kept for compatibility)
+        api_key: Anthropic API key
 
     Returns:
-        Configured OpenAI client instance
+        Configured Anthropic client instance
     """
     global _client, _current_config
 
-    if base_url:
-        _current_config["base_url"] = base_url
     if api_key:
         _current_config["api_key"] = api_key
 
-    _client = OpenAI(
-        base_url=_current_config["base_url"],
+    _client = anthropic.Anthropic(
         api_key=_current_config["api_key"],
     )
     return _client
 
 
-def get_client() -> OpenAI:
-    """Get or create the OpenAI client."""
+def get_client() -> anthropic.Anthropic:
+    """Get or create the Anthropic client."""
     global _client
     if _client is None:
-        _client = OpenAI(
-            base_url=_current_config["base_url"],
+        _client = anthropic.Anthropic(
             api_key=_current_config["api_key"],
         )
     return _client
@@ -69,19 +64,23 @@ def chat(
 
     Args:
         message: User message content
-        model: Model identifier
+        model: Model identifier (e.g., claude-sonnet-4-20250514)
         max_tokens: Maximum tokens in response
 
     Returns:
         Model's response text
     """
+    # Force use of Claude model if "default" or empty is passed
+    if model == "default" or not model:
+        model = DEFAULT_LLM_MODEL
+    
     client = get_client()
-    response = client.chat.completions.create(
+    response = client.messages.create(
         model=model,
         max_tokens=max_tokens,
         messages=[{"role": "user", "content": message}],
     )
-    return response.choices[0].message.content
+    return response.content[0].text
 
 
 def chat_with_history(
@@ -95,7 +94,7 @@ def chat_with_history(
 
     Args:
         messages: List of message dicts with role and content
-        model: Model identifier
+        model: Model identifier (e.g., claude-sonnet-4-20250514)
         max_tokens: Maximum tokens in response
         temperature: Sampling temperature (0.0 - 1.0)
 
@@ -105,46 +104,59 @@ def chat_with_history(
     Raises:
         ValueError: If the API returns an invalid or empty response
     """
+    # Force use of Claude model if "default" or empty is passed
+    if model == "default" or not model:
+        model = DEFAULT_LLM_MODEL
+    
     client = get_client()
-    response = client.chat.completions.create(
-        model=model,
-        max_tokens=max_tokens,
-        temperature=temperature,
-        messages=messages,
-    )
+    
+    # Extract system message if present (Claude handles system separately)
+    system_content = None
+    filtered_messages = []
+    
+    for msg in messages:
+        if msg.get("role") == "system":
+            system_content = msg.get("content", "")
+        else:
+            filtered_messages.append(msg)
+    
+    # Build the API call kwargs
+    kwargs = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "messages": filtered_messages,
+    }
+    
+    if system_content:
+        kwargs["system"] = system_content
+    
+    response = client.messages.create(**kwargs)
 
     # Validate response structure
     if response is None:
-        raise ValueError("LLM API returned None response")
+        raise ValueError("Claude API returned None response")
 
-    if not hasattr(response, 'choices') or response.choices is None:
-        raise ValueError(f"LLM API returned response without choices: {response}")
+    if not hasattr(response, 'content') or response.content is None:
+        raise ValueError(f"Claude API returned response without content: {response}")
 
-    if len(response.choices) == 0:
-        raise ValueError("LLM API returned empty choices list")
+    if len(response.content) == 0:
+        raise ValueError("Claude API returned empty content list")
 
-    choice = response.choices[0]
-    if not hasattr(choice, 'message') or choice.message is None:
-        raise ValueError(f"LLM API returned choice without message: {choice}")
-
-    content = choice.message.content
-    if content is None:
-        # Some models return None content with function_call or tool_calls
-        # Check if there's a function_call or tool_calls we can extract
-        if hasattr(choice.message, 'function_call') and choice.message.function_call:
-            fc = choice.message.function_call
-            return f"<|channel|>commentary to=functions.{fc.name}<|message|>{fc.arguments}<|call|>"
-        if hasattr(choice.message, 'tool_calls') and choice.message.tool_calls:
-            # Convert tool_calls to harmony format
-            parts = []
-            for tc in choice.message.tool_calls:
-                if tc.function:
-                    parts.append(f"<|channel|>commentary to=functions.{tc.function.name}<|message|>{tc.function.arguments}<|call|>")
-            if parts:
-                return "\n".join(parts)
-        raise ValueError("LLM API returned None content without function_call or tool_calls")
-
-    return content
+    content_block = response.content[0]
+    
+    # Handle text response
+    if hasattr(content_block, 'text'):
+        return content_block.text
+    
+    # Handle tool use response
+    if hasattr(content_block, 'type') and content_block.type == 'tool_use':
+        import json
+        tool_name = content_block.name
+        tool_input = json.dumps(content_block.input) if isinstance(content_block.input, dict) else str(content_block.input)
+        return f"<|channel|>commentary to=functions.{tool_name}<|message|>{tool_input}<|call|>"
+    
+    raise ValueError(f"Claude API returned unexpected content type: {content_block}")
 
 
 if __name__ == "__main__":

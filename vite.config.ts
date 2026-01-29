@@ -7,6 +7,10 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         port: 5173,
+        watch: {
+            // Ignore system files that can cause EBUSY errors on Windows
+            ignored: ['**/node_modules/**', '**/.git/**', 'C:\\DumpStack.log.tmp', 'C:\\hiberfil.sys', 'C:\\pagefile.sys', 'C:\\swapfile.sys'],
+        },
     },
     build: {
         rollupOptions: {

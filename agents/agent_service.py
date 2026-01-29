@@ -17,6 +17,8 @@ from core import (
     CONVERSATION_ID,
     REQUEST_TIMEOUT,
     DEFAULT_MAX_TOOL_ROUNDS,
+    DEFAULT_LLM_MODEL,
+    DEFAULT_LLM_API_KEY,
     VERBOSE_LOGS,
     log_text,
     strip_special_tags,
@@ -140,16 +142,25 @@ class AgentService(BaseAgentService):
 
         provider = model.get("provider", "")
 
-        if provider == "parallax":
-            base_url = runtime.get("endpoint")
-            if base_url:
-                api_key = runtime.get("apiKeyAlias") or "not-needed"
-                configure_llm(base_url=base_url, api_key=api_key)
-                print(f"[Agent] Configured parallax provider: {base_url}")
-
-                # Enable harmony format for parallax/gpt-oss
-                self._use_harmony_format = True
-                print(f"[Agent] Harmony format enabled for GPT-OSS")
+        if provider == "anthropic":
+            # Use Claude API
+            api_key = runtime.get("apiKeyAlias") or DEFAULT_LLM_API_KEY
+            configure_llm(api_key=api_key)
+            print(f"[Agent] Configured Claude/Anthropic provider")
+            # Claude uses standard format, no harmony needed
+            self._use_harmony_format = False
+        elif provider == "parallax":
+            # Legacy support - redirect to Claude
+            api_key = DEFAULT_LLM_API_KEY
+            configure_llm(api_key=api_key)
+            print(f"[Agent] Parallax provider redirected to Claude API")
+            self._use_harmony_format = False
+        else:
+            # Default to Claude for any other provider
+            api_key = runtime.get("apiKeyAlias") or DEFAULT_LLM_API_KEY
+            configure_llm(api_key=api_key)
+            print(f"[Agent] Default provider using Claude API")
+            self._use_harmony_format = False
 
     # =========================================================================
     # Harmony Format System Prompt Building
@@ -682,11 +693,36 @@ class AgentService(BaseAgentService):
         Supports:
         - Multi-round tool execution
         - GPT-OSS Harmony format (when enabled)
+        - Auto-RAG fetch for attachments
 
         Returns:
             Tuple of (only_tools, reply_text, tool_metadata)
             tool_metadata contains tool_results for RAG citations etc.
         """
+        # Check for attachment in current message and auto-fetch RAG content
+        metadata = current_msg.get("metadata", {})
+        attachment = metadata.get("attachment", {}) if isinstance(metadata, dict) else {}
+        
+        if attachment and attachment.get("uploadedToRag") and attachment.get("documentId"):
+            # Auto-fetch document content from RAG for the attachment
+            filename = attachment.get("filename", "document")
+            print(f"[Agent] Auto-fetching RAG content for attachment: {filename}")
+            
+            # Use the filename as search query to get relevant content
+            rag_result = self.tools.local_rag(filename, top_k=10)
+            if rag_result and rag_result.get("chunks"):
+                formatted_rag = self.tools.format_rag_results(rag_result)
+                # Inject RAG content into context
+                rag_context_msg = f"""[AUTO-RETRIEVED DOCUMENT CONTENT]
+The user attached a file: {filename}
+Here is the content extracted from the document:
+
+{formatted_rag}
+
+Use this content to answer the user's question about the document."""
+                context.append({"role": "user", "content": rag_context_msg})
+                print(f"[Agent] Injected {len(rag_result.get('chunks', []))} RAG chunks for attachment")
+        
         # Get max_tool_rounds from config, default to DEFAULT_MAX_TOOL_ROUNDS
         if max_tool_rounds is None:
             runtime = self.agent_config.get("runtime", {}) if self.agent_config else {}
@@ -716,7 +752,10 @@ class AgentService(BaseAgentService):
         model_config = (
             self.agent_config.get("model", {}) if self.agent_config else {}
         )
-        model_name = model_config.get("name", "default")
+        model_name = model_config.get("name", DEFAULT_LLM_MODEL)
+        # Use default Claude model if "default" is specified
+        if model_name == "default" or not model_name:
+            model_name = DEFAULT_LLM_MODEL
         temperature = model_config.get("temperature", 0.6)
         max_tokens = model_config.get("maxTokens", 1024)
 
@@ -838,7 +877,10 @@ Now provide your response based on the tool results above."""
         model_config = (
             self.agent_config.get("model", {}) if self.agent_config else {}
         )
-        model_name = model_config.get("name", "default")
+        model_name = model_config.get("name", DEFAULT_LLM_MODEL)
+        # Use default Claude model if "default" is specified
+        if model_name == "default" or not model_name:
+            model_name = DEFAULT_LLM_MODEL
         temperature = model_config.get("temperature", 0.6)
         max_tokens = model_config.get("maxTokens", 1024)
 

@@ -291,6 +291,595 @@
         "source": "agent"
       },
       "mentions": []
+    },
+    {
+      "id": "b7ae1373-aa65-4348-aa79-2deb11ec9d3d",
+      "content": "hii",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769701087883,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "f75ab85f-811b-4dca-86f1-f2d1548e4502",
+      "content": "hii",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769701195488,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "6a25aa62-636e-41dc-a26a-901749004881",
+      "content": "@AI Assistant hello",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769701345701,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": [
+        "llm1"
+      ]
+    },
+    {
+      "id": "95929c3c-9037-4240-a9b4-b85667bb7e69",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbvbEoa9QMTh8tEeKKE3'}",
+      "senderId": "llm1",
+      "timestamp": 1769701348809,
+      "replyToId": "6a25aa62-636e-41dc-a26a-901749004881",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "8eb343a7-ed3a-4a3e-9a42-51b51f3cab99",
+      "content": "hi",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769701522305,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "9c57fe23-2a59-4748-bb43-94b64a4d6d0e",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbvpJ2uAUqQGtVMTuN92'}",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769701525872,
+      "replyToId": "8eb343a7-ed3a-4a3e-9a42-51b51f3cab99",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "c329df2c-a855-42f1-ad67-b20f7c6b1fc6",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbvpN21fshCeGuCsGgHT'}",
+      "senderId": "llm1",
+      "timestamp": 1769701526847,
+      "replyToId": "8eb343a7-ed3a-4a3e-9a42-51b51f3cab99",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "bb289fca-aa72-414d-a562-db33484d100c",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbvpQjUoaSPDZrnpqqEe'}",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769701527509,
+      "replyToId": "8eb343a7-ed3a-4a3e-9a42-51b51f3cab99",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "6a12c382-67a3-4bcc-a84c-732eaa65098b",
+      "content": "Hello! How can I help you today?",
+      "senderId": "llm1",
+      "timestamp": 1769701527927,
+      "replyToId": "8eb343a7-ed3a-4a3e-9a42-51b51f3cab99",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "5b18b021-1399-448a-949a-49a5094b8888",
+      "content": "Hello! I'm MOSS, your friendly chat assistant. I can see there have been some technical issues with other AI agents experiencing 404 errors, but I'm here and ready to help! \n\nHow can I assist you today? 😊",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769701528193,
+      "replyToId": "8eb343a7-ed3a-4a3e-9a42-51b51f3cab99",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "dcef6fd1-3917-4322-8a17-66be5aa017ce",
+      "content": "@MOSS hi",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769701701714,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": [
+        "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859"
+      ]
+    },
+    {
+      "id": "704c7002-ff33-4629-ad21-5debbc685c41",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbw3RUjzkCPofBSMi1Gd'}",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769701704034,
+      "replyToId": "dcef6fd1-3917-4322-8a17-66be5aa017ce",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "f5f8eb87-3c9e-4df4-ae26-4f0cc7025dca",
+      "content": "Hello Admin! Nice to meet you! 👋 \n\nHow can I help you today?",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769701705768,
+      "replyToId": "dcef6fd1-3917-4322-8a17-66be5aa017ce",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "a140eccd-0003-41fc-8fb1-0456a91899b0",
+      "content": "go through this resume @HR  AGENT and give the detail\n\n📎 [Attachment: Ashwani Resume in cllg format in pdf.pdf]",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769701865146,
+      "reactions": [
+        {
+          "emoji": "thumbs_up",
+          "count": 1,
+          "userIds": [
+            "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7"
+          ]
+        }
+      ],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui",
+        "attachment": {
+          "filename": "Ashwani Resume in cllg format in pdf.pdf",
+          "size": 515953,
+          "type": "pdf",
+          "content": "[Binary file]",
+          "uploadedToRag": false
+        }
+      },
+      "mentions": [
+        "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7"
+      ],
+      "updatedAt": 1769701884388
+    },
+    {
+      "id": "88231b9c-5317-4caa-b271-e3cf3a4639ac",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbwFURgMrQ6kFwMzjpEh'}",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769701867563,
+      "replyToId": "a140eccd-0003-41fc-8fb1-0456a91899b0",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "b896d50c-a648-4e68-abe9-c425b5229b36",
+      "content": "I apologize, but I'm unable to access the specific content of the attached PDF file \"Ashwani Resume in cllg format in pdf.pdf\" through my current tools. The document doesn't appear to be indexed in the knowledge base that I can search through.\n\nTo provide you with a detailed analysis of Ashwani's resume, I would need either:\n\n1. **The document to be uploaded to the searchable knowledge base**, or\n2. **The text content to be pasted directly** in the message\n\nCould you please either:\n- Share the resume content as text in your message, or\n- Ensure the PDF is properly indexed in the system's knowledge base\n\nOnce I have access to the actual resume content, I'll be happy to provide you with a comprehensive analysis including:\n- Personal information and contact details\n- Educational background\n- Work experience\n- Technical skills and competencies\n- Projects and achievements\n- Professional certifications\n- Overall assessment and recommendations\n\nWould you be able to share the resume content in an alternative format?",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769701892012,
+      "replyToId": "a140eccd-0003-41fc-8fb1-0456a91899b0",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "tool_results": [
+          [
+            "local_rag",
+            "[No relevant documents found in knowledge base]"
+          ]
+        ],
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "c9c1fbc6-0767-41b0-9cb3-f80a091c288c",
+      "content": "@MOSS  hii",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769702301150,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": [
+        "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859"
+      ]
+    },
+    {
+      "id": "24dcf5a9-d091-4c79-94ad-3d5f79a56f0f",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbwopii64YHqngG9vMfB'}",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769702306306,
+      "replyToId": "c9c1fbc6-0767-41b0-9cb3-f80a091c288c",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "3c68e3d2-b4ee-4cd8-a1fe-75b8a8d0a74c",
+      "content": "hii",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769702633669,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "dbd15e71-3b15-4968-af0b-16a3950b0d50",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbxE9PHQ1GHSnJMrGhZ5'}",
+      "senderId": "llm1",
+      "timestamp": 1769702636295,
+      "replyToId": "3c68e3d2-b4ee-4cd8-a1fe-75b8a8d0a74c",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "2d64ede2-1572-4b63-bf48-eab9c2c0bea8",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbxE96RbiAbxZ8n3Rok5'}",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769702636299,
+      "replyToId": "3c68e3d2-b4ee-4cd8-a1fe-75b8a8d0a74c",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "620340a3-d996-4dc1-9a71-900536268dc6",
+      "content": "Sorry, I encountered an issue: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: default'}, 'request_id': 'req_011CXbxEA5TLyHMwbeAjLHe5'}",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769702636495,
+      "replyToId": "3c68e3d2-b4ee-4cd8-a1fe-75b8a8d0a74c",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "62009d3e-e67f-4473-9fae-62246a6ed681",
+      "content": "hii",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769703077597,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "215e32a9-a21a-46b1-b658-df2e4e8e5009",
+      "content": "Hi there! 👋 How can I help you today?",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769703081283,
+      "replyToId": "62009d3e-e67f-4473-9fae-62246a6ed681",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "aee2b9c5-c3da-443f-bc95-c7250f40d8e3",
+      "content": "Hi Admin! 👋 \n\nI'm HR AGENT, your research assistant. I'm here to help with paper searching, analysis, research, and summarization. How can I assist you today?",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769703082374,
+      "replyToId": "62009d3e-e67f-4473-9fae-62246a6ed681",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "592b1ebd-7a1b-4483-a2b2-490b6f8614e7",
+      "content": "Hello! 👋 \n\nI can see there have been some technical issues with the other AI agents, but I'm here and ready to help! How can I assist you today?",
+      "senderId": "llm1",
+      "timestamp": 1769703083281,
+      "replyToId": "62009d3e-e67f-4473-9fae-62246a6ed681",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "ec144e65-9059-4f5b-bce2-db5652975728",
+      "content": "@AI Assistant  hiii",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769703095201,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": [
+        "llm1"
+      ]
+    },
+    {
+      "id": "f4a20596-6609-4b15-9952-649706650585",
+      "content": "Hi Admin! 👋 \n\nGreat to hear from you! How can I help you today?",
+      "senderId": "llm1",
+      "timestamp": 1769703099606,
+      "replyToId": "ec144e65-9059-4f5b-bce2-db5652975728",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "69127f47-5f23-4529-9455-bdf2704d32b2",
+      "content": "i want to update my doday work y meetig at 9 pm",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769703124052,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "f9bb113e-ca86-4ec7-a11d-ba05dcadd2ee",
+      "content": "I understand you want to update your work schedule for today with a meeting at 9 PM. \n\nAs MOSS, I can help you organize this information, but I don't have access to calendar systems to make direct updates. Here are a few suggestions:\n\n**To update your schedule:**\n- Add it to your personal calendar app\n- Inform relevant team members about the 9 PM meeting\n- Set a reminder for yourself\n\n**Meeting details to consider:**\n- Meeting topic/agenda\n- Duration expected\n- Participants\n- Meeting platform (if virtual)\n\nWould you like me to help you draft a meeting invitation or organize any other details for your 9 PM meeting?",
+      "senderId": "agent-user-eaaad380-9b6d-40ff-9f60-ae9ee76a2859",
+      "timestamp": 1769703131814,
+      "replyToId": "69127f47-5f23-4529-9455-bdf2704d32b2",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-bfbd342f-5e27-493a-8194-acb711931040",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "0d9c476e-a506-4470-9af0-9ea1af343da2",
+      "content": "I understand you want to update your work schedule with a meeting at 9 PM today. However, I don't have access to your calendar or work scheduling system to make that update directly.\n\nHere are a few suggestions:\n- If you have a digital calendar (Google Calendar, Outlook, etc.), you can add the meeting there\n- You might want to inform your team or manager about this evening meeting\n- Consider setting a reminder for yourself\n\nIs there anything specific about this meeting you'd like help with, like preparing an agenda or setting up meeting logistics?",
+      "senderId": "llm1",
+      "timestamp": 1769703132119,
+      "replyToId": "69127f47-5f23-4529-9455-bdf2704d32b2",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "helper-agent-1",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "119ceb4d-669e-41d3-a808-ebbe77553327",
+      "content": "what is meeting time",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769703148150,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui"
+      },
+      "mentions": []
+    },
+    {
+      "id": "f9493cf6-960b-420c-bd47-fce1f6949802",
+      "content": "Based on your previous message, you mentioned wanting to schedule a meeting at **9 PM** today.\n\nIs this the correct time you're asking about, or are you looking for information about a different meeting?",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769703152902,
+      "replyToId": "119ceb4d-669e-41d3-a808-ebbe77553327",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "cb1e7472-c1d0-4889-bb4e-90fd6deedda4",
+      "content": "@HR  AGENT  analyse the resume\n\n📎 [Attachment: Ashwani Resume in cllg format in pdf.pdf]",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769703260845,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui",
+        "attachment": {
+          "filename": "Ashwani Resume in cllg format in pdf.pdf",
+          "size": 515953,
+          "type": "pdf",
+          "content": "[Binary file]",
+          "uploadedToRag": false
+        }
+      },
+      "mentions": [
+        "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7"
+      ]
+    },
+    {
+      "id": "30e36d26-3da1-416e-8c9a-b3b4bcdbed9b",
+      "content": "I can see you've attached a resume PDF file titled \"Ashwani Resume in cllg format in pdf.pdf\" that you'd like me to analyze. However, I'm not able to directly access or view the contents of the attached PDF file through my current tools.\n\nTo help you analyze the resume, I would need the content to be available in a text format. Here are a few options:\n\n1. **Copy and paste the text content** of the resume into our conversation\n2. **Upload the resume to the knowledge base** first, then I can search and analyze it\n3. **Provide key sections** you'd specifically like me to focus on\n\nOnce I have access to the resume content, I can help you with:\n- Overall structure and formatting analysis\n- Content review and suggestions\n- Skills and experience assessment\n- Recommendations for improvement\n- Alignment with specific job requirements (if you have a target role in mind)\n\nWould you like to try one of these approaches so I can provide a thorough analysis of Ashwani's resume?",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769703270447,
+      "replyToId": "cb1e7472-c1d0-4889-bb4e-90fd6deedda4",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "tool_results": [
+          [
+            "local_rag",
+            "[No relevant documents found in knowledge base]"
+          ]
+        ],
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
+    },
+    {
+      "id": "20e12a80-c3c2-459e-95b4-fdb4265bb77e",
+      "content": "@HR  AGENT  analyse this resume and what is name of pasant\n\n📎 [Attachment: Ashwani Resume in cllg format in pdf.pdf]",
+      "senderId": "341e4181-8712-46eb-ae47-bf6fd992d940",
+      "timestamp": 1769704614507,
+      "reactions": [],
+      "conversationId": "global",
+      "role": "user",
+      "metadata": {
+        "source": "ui",
+        "attachment": {
+          "filename": "Ashwani Resume in cllg format in pdf.pdf",
+          "size": 515953,
+          "type": "pdf",
+          "content": "[Binary file]",
+          "uploadedToRag": false
+        }
+      },
+      "mentions": [
+        "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7"
+      ]
+    },
+    {
+      "id": "5a29a803-5794-4162-b578-4fabbc05338a",
+      "content": "Thank you! Now I can properly analyze the resume based on the actual content. Let me provide a comprehensive analysis:\n\n## Resume Analysis for Ashwani Gupta\n\n### **Personal Information:**\n- **Full Name:** Ashwani Gupta\n- **Contact:** +91 7081801459\n- **Email:** ashwanig2004@gmail.com\n- **GitHub:** https://github.com/ASHWANIGUPTA18\n- **LinkedIn:** https://www.linkedin.com/in/ashwani-gupta-7aaabb293/\n\n### **Educational Background:**\n- **Current:** B.Tech in Engineering (2023-2027)\n  - Institution: MMMUT, Gorakhpur\n  - CGPA: 8.1/10.0 (Excellent performance!)\n- **Class XII (CBSE):** 91.2% from Tulsi Vidya Niketan (2022)\n- **Class X (CBSE):** 86.4% from St. Joseph (2020)\n\n### **Professional Experience:**\n- **Data Scientist Internship**\n- **Company:** HapScale Pvt. Ltd.\n- **Duration:** April 2025 - July 2025\n\n### **Key Observations:**\n\n**Strengths:**\n✅ Strong academic performance (8.1 CGPA)\n✅ Consistent good grades throughout education\n✅ Relevant internship in Data Science\n✅ Professional online presence (GitHub, LinkedIn)\n✅ Currently pursuing engineering degree\n\n**Areas for Improvement:**\n- Resume appears incomplete (missing skills, projects, additional details)\n- Could benefit from more detailed project descriptions\n- Technical skills section not visible in this excerpt\n\n### **Regarding \"pasant\" (Parent?):**\nFrom the available resume content, I don't see any parent/family information listed, which is typical for professional resumes.\n\n**Overall Assessment:** This appears to be a promising student with good academic credentials and relevant internship experience in Data Science. The resume would benefit from more detailed sections on skills, projects, and achievements.\n\nWould you like me to suggest improvements or analyze any specific aspects further?",
+      "senderId": "agent-user-fb0a309f-b96e-432e-80c0-55511318b4d7",
+      "timestamp": 1769704639873,
+      "replyToId": "20e12a80-c3c2-459e-95b4-fdb4265bb77e",
+      "reactions": [],
+      "conversationId": "global",
+      "role": "assistant",
+      "metadata": {
+        "tool_results": [
+          [
+            "local_rag",
+            "**Relevant information from knowledge base:**\n\n---\n[Source: Ashwani Resume in cllg format in pdf.pdf] (relevance: 0.44)\n[Page 1] Ashwani Gupta Contact No: +91 7081801459 Email ID: ashwanig2004@gmail.com GitHub Link: https://github.com/ASHWANIGUPTA18 LinkedIn: https://www.linkedin.com/in/ashwani-gupta- 7aaabb293/ ACADEMIC DETAILS B Tech (X Engineering) 2023-2027 MMMUT, Gorakhpur 8.1/10.0 Class XII (CBSE) 2022 Tulsi Vidya Niketan 91.2% Class X (CBSE) 2020 St. Joseph 86.4% INTERNSHIP/EXPERIENCE Data Scientist HapScale Pvt. Ltd. April 2025-July 2025\n"
+          ]
+        ],
+        "agentId": "agent-42c94532-4a63-44d7-a36a-6206302e5619",
+        "source": "agent"
+      },
+      "mentions": []
     }
   ],
   "typing": {},
@@ -571,9 +1160,9 @@
     }
   ],
   "agentHeartbeats": {
-    "helper-agent-1": 1765442822490,
-    "agent-bfbd342f-5e27-493a-8194-acb711931040": 1765442822492,
-    "agent-42c94532-4a63-44d7-a36a-6206302e5619": 1765442822491,
+    "helper-agent-1": 1769704853238,
+    "agent-bfbd342f-5e27-493a-8194-acb711931040": 1769704853489,
+    "agent-42c94532-4a63-44d7-a36a-6206302e5619": 1769704853815,
     "agent-dc0d26b4-986e-44f5-9cc9-b6c08f88ba03": 1764845714406
   },
   "agentLooking": {},

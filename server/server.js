@@ -66,10 +66,10 @@ const ALLOWED_ROLES = new Set(["user", "assistant", "system", "tool"]);
 const AGENT_API_TOKEN =
   process.env.AGENT_API_TOKEN || process.env.AGENT_API_KEY || "dev-agent-token";
 
-// LLM Configuration (can be overridden by agent config)
-const LLM_ENDPOINT = process.env.LLM_ENDPOINT || "";
-const LLM_API_KEY = process.env.LLM_API_KEY || "not-needed";
-const LLM_MODEL = process.env.LLM_MODEL || "default";
+// LLM Configuration (Claude API)
+const LLM_ENDPOINT = process.env.LLM_ENDPOINT || "https://api.anthropic.com";
+const LLM_API_KEY = process.env.LLM_API_KEY || process.env.ANTHROPIC_API_KEY || "";
+const LLM_MODEL = process.env.LLM_MODEL || "claude-sonnet-4-20250514";
 
 const adapter = new JSONFile(DB_PATH);
 const db = new Low(adapter, {
@@ -1145,7 +1145,7 @@ ${recentMessages}
   }
 
   console.log(
-    `[Summarize] Calling LLM (streaming) at ${llmEndpoint}/chat/completions using model ${llmModel} [Language: ${language}]`
+    `[Summarize] Calling Claude API (streaming) at ${llmEndpoint}/v1/messages using model ${llmModel} [Language: ${language}]`
   );
 
   // Set up SSE headers
@@ -1162,20 +1162,21 @@ ${recentMessages}
   res.flushHeaders();
 
   try {
-    // Call the LLM endpoint with streaming
-    const llmResponse = await fetch(`${llmEndpoint}/chat/completions`, {
+    // Call Claude API with streaming
+    const llmResponse = await fetch(`${llmEndpoint}/v1/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(llmApiKey ? { Authorization: `Bearer ${llmApiKey}` } : {}),
+        "x-api-key": llmApiKey,
+        "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
         model: llmModel,
         max_tokens: 1024,
+        system: systemPrompt,
+        messages: [
+          { role: "user", content: userPrompt },
+        ],
         stream: true,
       }),
     });
@@ -1236,116 +1237,43 @@ ${recentMessages}
 
           try {
             const parsed = JSON.parse(data);
-            const delta = parsed.choices?.[0]?.delta?.content || "";
+            
+            // Handle Claude's streaming format
+            // Claude sends events with type: 'content_block_delta' containing delta.text
+            let delta = "";
+            if (parsed.type === "content_block_delta" && parsed.delta?.text) {
+              delta = parsed.delta.text;
+            } else if (parsed.choices?.[0]?.delta?.content) {
+              // Fallback for OpenAI format
+              delta = parsed.choices[0].delta.content;
+            }
 
             if (delta) {
               fullContent += delta;
 
-              // Parse harmony tokens in the accumulated content
-              // Check for channel switches
-              const analysisMatch = fullContent.match(
-                /<\|channel\|>analysis<\|message\|>/i
-              );
-              const finalMatch = fullContent.match(
-                /<\|channel\|>final<\|message\|>/i
-              );
-              const endMatch = fullContent.match(/<\|end\|>|<\|return\|>/i);
-
-              // Detect channel switch
-              if (finalMatch && currentChannel !== "final") {
-                // Switching to final channel - clear reasoning on frontend
-                currentChannel = "final";
-                channelContent = "";
-                sendParsedChunk("channel_switch", "final");
-
-                // Extract content after <|channel|>final<|message|>
-                const finalIdx = fullContent.lastIndexOf(
-                  "<|channel|>final<|message|>"
-                );
-                if (finalIdx !== -1) {
-                  const afterFinal = fullContent.slice(
-                    finalIdx + "<|channel|>final<|message|>".length
-                  );
-                  // Remove any trailing end tokens for display
-                  const cleanAfter = afterFinal.replace(
-                    /<\|end\|>|<\|return\|>/gi,
-                    ""
-                  );
-                  if (cleanAfter.trim()) {
-                    channelContent = cleanAfter;
-                    sendParsedChunk("final", cleanAfter);
-                  }
-                }
-              } else if (
-                analysisMatch &&
-                currentChannel !== "analysis" &&
-                !finalMatch
-              ) {
-                // Switching to analysis channel
-                currentChannel = "analysis";
-                channelContent = "";
-                sendParsedChunk("channel_switch", "analysis");
-
-                // Extract content after <|channel|>analysis<|message|>
-                const analysisIdx = fullContent.lastIndexOf(
-                  "<|channel|>analysis<|message|>"
-                );
-                if (analysisIdx !== -1) {
-                  const afterAnalysis = fullContent.slice(
-                    analysisIdx + "<|channel|>analysis<|message|>".length
-                  );
-                  // Remove end tokens and subsequent channel markers
-                  const cleanAfter = afterAnalysis.split(
-                    /<\|end\|>|<\|start\|>|<\|channel\|>/i
-                  )[0];
-                  if (cleanAfter.trim()) {
-                    channelContent = cleanAfter;
-                    sendParsedChunk("reasoning", cleanAfter);
-                  }
-                }
-              } else if (currentChannel === "final") {
-                // Continue streaming final content
-                const cleanDelta = delta.replace(
-                  /<\|end\|>|<\|return\|>/gi,
-                  ""
-                );
-                if (cleanDelta) {
-                  sendParsedChunk("final", cleanDelta);
-                }
-              } else if (currentChannel === "analysis") {
-                // Continue streaming reasoning content
-                // Stop if we hit end/start/channel markers
-                if (!/<\|end\|>|<\|start\|>|<\|channel\|>/i.test(delta)) {
-                  sendParsedChunk("reasoning", delta);
-                }
-              } else {
-                // No channel detected yet
-                // Check if content looks like harmony format - if so, wait for channel detection
-                const looksLikeHarmony = /<\|/.test(fullContent);
-                if (!looksLikeHarmony) {
-                  // Non-harmony model output, send as raw chunk
-                  sendParsedChunk("chunk", delta);
-                }
-                // If it looks like harmony format, don't send anything yet - wait for channel detection
-              }
+              // For Claude, send content directly (no harmony format)
+              sendParsedChunk("chunk", delta);
             }
           } catch (e) {
             // Skip invalid JSON
           }
+        } else if (line.startsWith("event: ")) {
+          // Handle Claude event types (message_start, content_block_start, etc.)
+          // These don't contain content, just metadata
+          continue;
         }
       }
     }
 
-    // Send final parsed output
-    const finalOutput = extractFinalOutput(fullContent);
+    // Send final output
     console.log(
-      `[Summarize] Streaming complete - raw: ${fullContent.length}, final: ${finalOutput.length} chars`
+      `[Summarize] Streaming complete - ${fullContent.length} chars`
     );
     res.write(
       `data: ${JSON.stringify({
         done: true,
         rawContent: fullContent,
-        output: finalOutput,
+        output: fullContent,
       })}\n\n`
     );
     res.end();

@@ -41,7 +41,7 @@ CONTEXT_LIMIT = 10  # number of messages in context
 REQUEST_TIMEOUT = 10  # seconds for HTTP requests
 LLM_TIMEOUT = 30  # seconds for LLM calls
 
-# LLM Provider Defaults
-DEFAULT_LLM_BASE_URL = "https://7fjm4igmx7zj7f-3005.proxy.runpod.net/v1"
-DEFAULT_LLM_MODEL = "default"
-DEFAULT_LLM_API_KEY = "not-needed"
+# LLM Provider Defaults (Claude API)
+DEFAULT_LLM_BASE_URL = "https://api.anthropic.com"
+DEFAULT_LLM_MODEL = "claude-sonnet-4-20250514"
+DEFAULT_LLM_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")

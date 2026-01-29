@@ -656,7 +656,7 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
             </div>
 
             <div className="content-list">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="sync">
                     {contentSubTab === 'documents' && (
                         documents.length === 0 ? (
                             <motion.div
@@ -1173,7 +1173,7 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
                 </div>
             </div>
             <div className="search-results-list">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="sync">
                     {searchResults.length === 0 ? (
                         <motion.div
                             key="empty-search"

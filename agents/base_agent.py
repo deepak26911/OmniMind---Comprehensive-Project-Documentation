@@ -275,10 +275,23 @@ class BaseAgentService(ABC):
             msg_id = msg.get("id", "")
             mentions = msg.get("mentions", [])
             reply_to_id = msg.get("replyToId")
+            metadata = msg.get("metadata", {})
 
             # Clean content
             content = strip_special_tags(msg.get("content", ""))
             content = RE_MENTION.sub("", content).strip()
+
+            # Check for attachment in metadata
+            attachment = metadata.get("attachment", {}) if isinstance(metadata, dict) else {}
+            attachment_info = ""
+            if attachment and attachment.get("filename"):
+                filename = attachment.get("filename", "unknown")
+                doc_id = attachment.get("documentId", "")
+                uploaded_to_rag = attachment.get("uploadedToRag", False)
+                if uploaded_to_rag and doc_id:
+                    attachment_info = f"\n[ATTACHMENT: {filename} - Document uploaded to knowledge base (documentId: {doc_id}). Use local_rag tool to search and analyze its contents.]"
+                else:
+                    attachment_info = f"\n[ATTACHMENT: {filename}]"
 
             # Determine direction
             directed_to = None
@@ -314,11 +327,11 @@ class BaseAgentService(ABC):
                 sender_name = user_map.get(sender_id, "User")
 
                 if directed_to_me:
-                    formatted = f"[msg:{msg_id}] {sender_name} (to you): {content}"
+                    formatted = f"[msg:{msg_id}] {sender_name} (to you): {content}{attachment_info}"
                 elif directed_to:
-                    formatted = f"[msg:{msg_id}] {sender_name} (to @{directed_to}): {content}"
+                    formatted = f"[msg:{msg_id}] {sender_name} (to @{directed_to}): {content}{attachment_info}"
                 else:
-                    formatted = f"[msg:{msg_id}] {sender_name}: {content}"
+                    formatted = f"[msg:{msg_id}] {sender_name}: {content}{attachment_info}"
                 context_messages.append({"role": "user", "content": formatted})
 
         return context_messages
